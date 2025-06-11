@@ -24,6 +24,10 @@ class HiveTestSuite:
     def end(self):
         response = requests.delete(self.url)
         response.raise_for_status()
+    
+    def start_client(self, **kwargs) -> Client | None:
+        kwargs["url"] = f"{self.url}/node"
+        return Client.start(**kwargs)
 
     def start_test(self, name: str, description: str) -> "HiveTest":
         url = f"{self.url}/test"
