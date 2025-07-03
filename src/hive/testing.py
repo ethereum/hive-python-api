@@ -24,10 +24,12 @@ class HiveTestSuite:
     def end(self):
         response = requests.delete(self.url)
         response.raise_for_status()
-    
+
     def start_client(self, **kwargs) -> Client | None:
         kwargs["url"] = f"{self.url}/node"
-        return Client.start(**kwargs)
+        client = Client.start(**kwargs)
+        client.shared = True
+        return client
 
     def start_test(self, name: str, description: str) -> "HiveTest":
         url = f"{self.url}/test"
@@ -71,3 +73,10 @@ class HiveTest:
     def start_client(self, **kwargs) -> Client | None:
         kwargs["url"] = f"{self.url}/node"
         return Client.start(**kwargs)
+
+    def register_shared_client(self, client: Client):
+        if not client.shared:
+            return
+        url = f"{client.url}/{client.id}/test/{self.id}"
+        response = requests.post(url)
+        response.raise_for_status()
