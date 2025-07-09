@@ -33,8 +33,9 @@ jobs:
           uv run isort --check-only src/
           uv run mypy src/
 
-      - name: Run tests
-        run: uv run pytest
+      # requires hive --dev.
+      # - name: Run tests
+      #   run: uv run pytest
 
       - name: Build and publish to PyPI
         run: uv publish
