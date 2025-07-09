@@ -1,38 +1,57 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=64", "setuptools-scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hive.py"
-description = "Ethereum Hive Simulators Python Interface"
+name = "ethereum-hive"
+description = "Ethereum Hive Simulator Python API"
 readme = "README.md"
-version = "0.1.0"
-urls = { "Homepage" = "https://github.com/marioevz/hive.py" }
+authors = [{ name = "Mario Vega", email = "mario.vega@ethereum.org" }]
+maintainers = [
+    { name = "Mario Vega", email = "mario.vega@ethereum.org" },
+    { name = "danceratopz", email = "danceratopz@ethereum.org" },
+]
+keywords = ["ethereum", "hive", "simulator", "testing", "blockchain"]
+dynamic = ["version"]
 license = { file = "LICENSE" }
 classifiers = [
-    "License :: OSI Approved :: GPL3 License",
-    "Programming Language :: Python :: 3.10",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Networking",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Operating System :: OS Independent",
 ]
-requires-python = ">=3.10"
-dependencies = [
-    "requests>=2.31.0,<3"
-]
+requires-python = ">=3.11"
+dependencies = ["requests>=2.31.0,<3"]
+
+[project.urls]
+Homepage = "https://github.com/marioevz/hive.py"
+Repository = "https://github.com/marioevz/hive.py"
+Issues = "https://github.com/marioevz/hive.py/issues"
+Documentation = "https://github.com/marioevz/hive.py#readme"
 
 [project.optional-dependencies]
-test = [
-    "pytest>=7.4.0,<8",
-    "pytest-cov>=4.1.0,<5"
-]
+test = ["pytest>=8.4.0,<9", "pytest-cov>=4.1.0,<5"]
 lint = [
-    "black==22.3.0; implementation_name == 'cpython'",
+    "black>=23.1.0; implementation_name == 'cpython'",
     "isort>=5.8,<6",
     "mypy>=1.4.1,<2",
-    "types-requests>=2.25.0,<3"
+    "types-requests>=2.25.0,<3",
 ]
+dev = ["setuptools-scm"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
 exclude = ["*tests*"]
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "dirty-tag"
 
 [tool.isort]
 profile = "black"
@@ -41,9 +60,19 @@ line_length = 99
 
 [tool.black]
 line-length = 99
-target-version = ["py310"]
+target-version = ["py311"]
 
 [tool.pytest.ini_options]
 console_output_style = "count"
 minversion = "7.0"
 testpaths = ["src"]
+
+
+[[tool.uv.index]]
+# pypi test index; use `uv publish --index testpypi` to publish to this index
+# uv publish will default to the production pypi index by default
+# https://docs.astral.sh/uv/guides/package/#publishing-your-package
+name = "testpypi"
+url = "https://test.pypi.org/simple/"
+publish-url = "https://test.pypi.org/legacy/"
+explicit = true
