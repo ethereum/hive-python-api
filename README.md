@@ -68,7 +68,7 @@ test.end(result=HiveTestResult(test_pass=True, details="test details"))
 suite.end()
 ```
 
-For more detailed examples, check out the [unit tests](src/hive/tests/test_sanity.py) or explore the simulators in the [execution-spec-tests](https://github.com/ethereum/execution-spec-tests) repository.
+For more detailed examples, check out the [unit tests](https://github.com/ethereum/hive-python-api/blob/e4a1108f3a8feab4c0d638f1393a94319733ae89/src/hive/tests/test_sanity.py) or explore the simulators in the [execution-spec-tests](https://github.com/ethereum/execution-spec-tests) repository.
 
 ## Development
 
