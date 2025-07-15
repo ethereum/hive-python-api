@@ -23,23 +23,49 @@ pip install ethereum-hive
 
 ## Quick Start
 
-Here's a basic example of how to use the Hive Python API:
+### Start a Hive Development Server
+
+```console
+./hive --dev --client go-ethereum
+```
+
+### Basic Example
+
+Here's a basic example of how to use the Hive Python API with Hive running in developer mode. It requires a [genesis file](https://github.com/ethereum/hive-python-api/blob/e4a1108f3a8feab4c0d638f1393a94319733ae89/src/hive/tests/genesis.json); please modify the path as required.
 
 ```python
-from hive import Hive
-from hive.client import Client
+from pathlib import Path
 
-# Initialize Hive simulator
-hive = Hive()
+from hive.simulation import Simulation
+from hive.testing import HiveTestResult
 
-# Start a client
-client = hive.start_client("go-ethereum")
+# Create a simulation on a development hive server
+simulator = Simulation(url="http://127.0.0.1:3000")
+
+# Get information about the hive instance cli args and clients
+hive_info = simulator.hive_instance()
+
+# Start a test suite
+suite = simulator.start_suite("my_test_suite", "my test suite description")
+
+# Start a test
+test = suite.start_test("my_test", "my test description")
+
+# Start a client for the test
+all_clients = simulator.client_types()
+print(all_clients[0].version)
+
+# Specify the genesis file; here we use the genesis from the unit test
+files = {"genesis.json": Path("src/hive/tests/genesis.json").as_posix()}
+env = {"HIVE_CHAIN_ID": "1"}
+client = test.start_client(client_type=all_clients[0], environment=env, files=files)
 
 # Run your test logic
 # ...
 
-# Stop the client
-hive.stop_client(client)
+# Stop the test and the suite (will clean-up clients)
+test.end(result=HiveTestResult(test_pass=True, details="test details"))
+suite.end()
 ```
 
 For more detailed examples, check out the [unit tests](src/hive/tests/test_sanity.py) or explore the simulators in the [execution-spec-tests](https://github.com/ethereum/execution-spec-tests) repository.
