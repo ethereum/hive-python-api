@@ -113,7 +113,7 @@ class Client:
     config: ClientConfig
     id: str
     ip: str
-    shared: bool = False
+    multi_test: bool = False
 
     @classmethod
     def start(

@@ -68,8 +68,8 @@ class HiveTest:
         kwargs["url"] = f"{self.url}/node"
         return Client.start(**kwargs)
 
-    def register_shared_client(self, client: Client):
-        if not client.shared:
+    def use_multi_test_client(self, client: Client):
+        if not client.multi_test:
             return
         url = f"{client.url}/{client.id}/test/{self.id}"
         response = requests.post(url)
