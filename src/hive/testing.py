@@ -68,9 +68,10 @@ class HiveTest:
         kwargs["url"] = f"{self.url}/node"
         return Client.start(**kwargs)
 
-    def use_multi_test_client(self, client: Client):
+    def register_multi_test_client(self, client: Client):
+        """Register a test for execution against a multi-test client."""
         if not client.multi_test:
             return
-        url = f"{client.url}/{client.id}/test/{self.id}"
+        url = f"{client.url}/{client.id}/register/{self.id}"
         response = requests.post(url)
         response.raise_for_status()
