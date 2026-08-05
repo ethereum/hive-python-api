@@ -1,9 +1,8 @@
 from dataclasses import asdict, dataclass
 
-import requests
-
 from .client import Client
 from .network import Network
+from .session import get_session
 
 
 @dataclass(kw_only=True)
@@ -16,13 +15,13 @@ class HiveTestSuite:
     @classmethod
     def start(cls, url: str, name: str, description: str) -> "HiveTestSuite":
         req = {"Name": name, "Description": description}
-        response = requests.post(url, json=req)
+        response = get_session().post(url, json=req)
         response.raise_for_status()
         id = response.json()
         return cls(url=f"{url}/{id}", name=name, description=description, id=id)
 
     def end(self):
-        response = requests.delete(self.url)
+        response = get_session().delete(self.url)
         response.raise_for_status()
 
     def start_test(self, name: str, description: str) -> "HiveTest":
@@ -55,13 +54,13 @@ class HiveTest:
     @classmethod
     def start(cls, *, url: str, name: str, description: str) -> "HiveTest":
         req = {"Name": name, "Description": description}
-        response = requests.post(url, json=req)
+        response = get_session().post(url, json=req)
         response.raise_for_status()
         id = response.json()
         return cls(url=f"{url}/{id}", name=name, description=description, id=id)
 
     def end(self, *, result: HiveTestResult):
-        response = requests.post(self.url, json=result.to_dict())
+        response = get_session().post(self.url, json=result.to_dict())
         response.raise_for_status()
 
     def start_client(self, **kwargs) -> Client | None:
@@ -73,5 +72,5 @@ class HiveTest:
         if not client.multi_test:
             return
         url = f"{client.url}/{client.id}/register/{self.id}"
-        response = requests.post(url)
+        response = get_session().post(url)
         response.raise_for_status()
