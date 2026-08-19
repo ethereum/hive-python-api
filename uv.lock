@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.11"
 
 [[package]]
@@ -172,6 +172,7 @@ name = "ethereum-hive"
 source = { editable = "." }
 dependencies = [
     { name = "requests" },
+    { name = "urllib3" },
 ]
 
 [package.optional-dependencies]
@@ -199,6 +200,7 @@ requires-dist = [
     { name = "requests", specifier = ">=2.31.0,<3" },
     { name = "setuptools-scm", marker = "extra == 'dev'" },
     { name = "types-requests", marker = "extra == 'lint'", specifier = ">=2.25.0,<3" },
+    { name = "urllib3", specifier = ">=1.26.0,<3" },
 ]
 provides-extras = ["test", "lint", "dev"]
 
