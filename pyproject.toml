@@ -30,10 +30,10 @@ requires-python = ">=3.11"
 dependencies = ["requests>=2.31.0,<3", "urllib3>=1.26.0,<3"]
 
 [project.urls]
-Homepage = "https://github.com/marioevz/hive.py"
-Repository = "https://github.com/marioevz/hive.py"
-Issues = "https://github.com/marioevz/hive.py/issues"
-Documentation = "https://github.com/marioevz/hive.py#readme"
+Homepage = "https://github.com/ethereum/hive-python-api"
+Repository = "https://github.com/ethereum/hive-python-api"
+Issues = "https://github.com/ethereum/hive-python-api/issues"
+Documentation = "https://github.com/ethereum/hive-python-api#readme"
 
 [project.optional-dependencies]
 test = ["pytest>=8.4.0,<9", "pytest-cov>=4.1.0,<5"]
