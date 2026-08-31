@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [v0.1.0] - 2026-08-31
+
+Initial stable release of the Python Hive Simulator API with:
+
+- Network configuration support.
+- Client management functionality.
+- Test suite management functionality, including clients shared across
+  multiple tests.
+
 ### Fixed
 
 - All Hive API calls in `hive/testing.py` (`HiveTestSuite.start`/`end`,
@@ -17,11 +26,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   tests/s), per-call connections exhausted the client-side ephemeral port range
   toward the Hive API endpoint (`OSError: [Errno 99]`, `EADDRNOTAVAIL`),
   causing sporadic test failures and silently lost test results.
-
-## [v0.1.0] - 2025-07-09
-
-Initial release of the Python Hive Simulator API with:
-
-- Network configuration support.
-- Client management functionality.
-- Test suite management functionality.
