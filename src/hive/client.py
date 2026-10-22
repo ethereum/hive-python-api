@@ -94,14 +94,15 @@ class ClientEnode:
         prefix = "enode://"
         enode = enode.removeprefix(prefix)
 
-        id, ip_port = enode.split("@")
+        id, ip_port = enode.split("@", maxsplit=1)
 
-        ip, port = ip_port.split(":")
+        ip, port = ip_port.rsplit(":", maxsplit=1)
 
-        return cls(id=id, ip=ip_address(ip), port=int(port))
+        return cls(id=id, ip=ip_address(ip.strip("[]")), port=int(port))
 
     def __str__(self) -> str:
-        return f"enode://{self.id}@{self.ip}:{self.port}"
+        ip = f"[{self.ip}]" if isinstance(self.ip, IPv6Address) else self.ip
+        return f"enode://{self.id}@{ip}:{self.port}"
 
     def to_json(self):
         return str(self)

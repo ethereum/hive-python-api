@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `ClientEnode` now parses and emits bracketed IPv6 endpoints, matching the
+  canonical `enode://` URL form produced by Ethereum clients.
+
 ## [v0.1.0] - 2026-08-31
 
 Initial stable release of the Python Hive Simulator API with:
