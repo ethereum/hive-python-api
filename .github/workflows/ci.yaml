@@ -22,7 +22,7 @@ jobs:
         with:
           # version: ${{ vars.UV_VERSION }}
           # python-version: ${{ vars.DEFAULT_PYTHON_VERSION }}
-          version: 0.7.3
+          version: 0.13.4
           python-version: 3.12
 
       - name: Install dependencies
