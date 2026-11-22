@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `ClientConfig.post_with_files` now accepts `bytes` file contents, as its
+  `files` type annotation advertises; they previously failed an assertion.
+
 ## [v0.1.0] - 2026-08-31
 
 Initial stable release of the Python Hive Simulator API with:
