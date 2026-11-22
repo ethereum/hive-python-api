@@ -45,7 +45,7 @@ class ClientConfig:
                     open_fn_or_name = BytesIO(open_fn_or_name)  # type: ignore
                 if isinstance(open_fn_or_name, str):
                     open_fn_or_name = open(open_fn_or_name, "rb")
-                assert isinstance(open_fn_or_name, BufferedReader)
+                assert isinstance(open_fn_or_name, (BufferedReader, BytesIO))
                 files[filename] = open_fn_or_name
 
         # Send the request.
